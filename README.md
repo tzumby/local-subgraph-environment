@@ -8,10 +8,15 @@ https://thegraph.academy/developers/local-development/
 
 The following packeges and tools have to be installed for the setup to be working:
 
-### Anvil:
-https://github.com/bluealloy/revm/issues/135
+### npm
 
-### Docker:
+https://www.npmjs.com/package/npm
+
+### Foundry
+
+https://book.getfoundry.sh/getting-started/installation
+
+### Docker
 https://docs.docker.com/get-started/#download-and-install-docker
 
 For the usage of docker-compose you might have to install the cli tool seperately. For my Ubuntu-Linux System I used apt install:
@@ -31,6 +36,16 @@ yarn global add @graphprotocol/graph-cli
 ## Setting up
 
 The following steps should be followed in the given order to set up the local Test Setup.
+
+### Install dependencies
+
+Navigate in Terminal to the basicSubgraph folder
+
+```
+npm install
+```
+
+Installs all necessary dependecies needed for subgraph development.
 
 ### Local Chain with Anvil
 
@@ -84,11 +99,19 @@ Starts the graph-node that should link up to the local chain automatically.
 
 Note: For linux users you might have to use ```sudo``` for the script and docker commands.
 
-## Subgraph Subgraph
+## Subgraph
 
-### Base Necessities
+In the following steps we create a subgraph from scratch and then deploy it to the local graph-mode.
 
-#### subgraph.yaml / the subgraph manifest
+Note: [Here](https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md) is an detailed explanation of creating a subgraph.
+
+### Target Contract ABI
+
+Note: This could technically be avoided, by referencing the abi from the original contract folder directly in the subgraph.yaml.
+
+### GraphQL Entity
+
+### subgraph.yaml / the subgraph manifest
 
 ```
 description: <Subgraph Description>
@@ -116,20 +139,35 @@ dataSources:
         - event: <event signature in solidity> #has to be repeated for every event that is listend to
           handler: <handler function name> #according handler function name in mapping file above
 ```
+Note: [Here](https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md) is a description for each of  the fields in the yaml file.
 
-https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md
+### Deploying Subgraph
 
-https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md
+Generate the 
 
-https://vitalpoint.ai/course/subgraph-manifest/
-
-### Finalizing
-
+```
 graph codegen
+```
 
-## Testing
+```
+graph create basicSubgraph --node http://127.0.0.1:8020
+```
 
-https://lucasconstantino.github.io/graphiql-online/
+```
+graph deploy basicSubgraph --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020
+```
+
+## Testing the GraphQL Interface of the Graph-Node
+
+With [this Website](https://lucasconstantino.github.io/graphiql-online/) we can directly send GraphQl Requests to the Graph Node and test it.
+
+For this change the endpoint of the website to the given endpoint by the appropriate graph node ip-address (its shown in the terminal when a subgraph is deployed).  
+
+The answer to the following request should represent the state of the exampleContract that we deployed via the exampleContractDeploymentScript in @todo reference ### Push contract to the chain.
+
+```
+query{datas(subgraphError: allow){id,data}}
+```
 
 <style>
 body { counter-reset: h1counter h2counter h3counter h4counter h5counter h6counter; }
