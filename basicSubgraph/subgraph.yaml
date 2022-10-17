@@ -1,27 +1,24 @@
+description: DataMapping
 specVersion: 0.0.4
-description: Gravatar for Ethereum
-repository: https://github.com/graphprotocol/example-subgraph
 schema:
-  file: ./schema.graphql
+    file: schema.graphql
 dataSources:
-  - kind: ethereum/contract
-    name: Gravity
+  - name: DataMapping
+    kind: ethereum/contract
     network: mainnet
     source:
-      address: '0xD449b15B97B7C2d78C1ae7B62B2A6Dee7b2e218F'
-      abi: Gravity
+      address: '0x5fbdb2315678afecb367f032d93f642f64180aa3'
+      abi: DataMapping
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.6 #Not clear yet what implication this has
       language: wasm/assemblyscript
+      file: ./src/mapping.ts #+path
       entities:
-        - Gravatar
+        - Data
       abis:
-        - name: Gravity
-          file: ./abi/Gravity.json
+        - name: DataMapping #used in source: abi above
+          file: ./abi/DataMapping.json #+path
       eventHandlers:
-        - event: NewGravatar(uint256,address,string,string)
-          handler: handleNewGravatar
-        - event: UpdatedGravatar(uint256,address,string,string)
-          handler: handleUpdatedGravatar
-      file: ./src/mapping.ts
+        - event: newData(uint256,uint256) #has to be repeated for every event that is listend to
+          handler: handleNewData #according handler function name in mapping file above
