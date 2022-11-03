@@ -1,5 +1,9 @@
 # Setting up a local Subgraph Environment
 
+This repository was created for **EVM Expeditions #03**, where [Felix](https://github.com/FHieser) gave an intro to subgraph development. You can find the video here:
+
+[**👉 Click here for the video 👈**](https://www.youtube.com/watch?v=vCn7umrSnSg)
+
 Structurewise this is an example project that should show how to setup a local Subgraph Environment.
 This repo is based on the setup manual from The Graph directly:
 https://thegraph.academy/developers/local-development/
@@ -138,39 +142,3 @@ The answer to the following request should represent the state of the exampleCon
 ```
 query{datas(subgraphError: allow){id,data}}
 ```
-
-<style>
-body { counter-reset: h1counter h2counter h3counter h4counter h5counter h6counter; }
-
-h1 { counter-reset: h2counter; }
-h2 { counter-reset: h3counter; }
-h3 { counter-reset: h4counter; }
-h4 { counter-reset: h5counter; }
-h5 { counter-reset: h6counter; }
-h6 {}
-
-h2:before {
-    counter-increment: h2counter;
-    content: counter(h2counter) ".\0000a0\0000a0";
-}
-
-h3:before {
-    counter-increment: h3counter;
-    content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
-}
-
-h4:before {
-    counter-increment: h4counter;
-    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) ".\0000a0\0000a0";
-}
-
-h5:before {
-    counter-increment: h5counter;
-    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) ".\0000a0\0000a0";
-}
-
-h6:before {
-    counter-increment: h6counter;
-    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) "." counter(h6counter) ".\0000a0\0000a0";
-}
-</style>
