@@ -8,6 +8,10 @@ Structurewise this is an example project that should show how to setup a local S
 This repo is based on the setup manual from The Graph directly:
 https://thegraph.academy/developers/local-development/
 
+## Clone with submodules
+
+`git clone --recursive git@github.com:tzumby/local-subgraph-environment.git`
+
 ## Prequisites
 
 The following packeges and tools have to be installed for the setup to be working:
@@ -69,6 +73,12 @@ In a new Terminal navigate to contractExample folder:
 
 ```
 cd contractExample
+```
+
+Build the project:
+
+```
+forge build
 ```
 
 Use forge to push the contract via the given script to the local Chain.
